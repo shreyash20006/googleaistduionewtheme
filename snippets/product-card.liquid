@@ -1,0 +1,354 @@
+{% comment %}
+  Renders a product card
+
+  Accepts:
+  - product: {Object} Product Liquid object
+
+  Usage:
+  {% render 'product-card', product: product %}
+{% endcomment %}
+
+<div class="product-card glass-card">
+  <a href="{{ product.url }}" class="product-card__link">
+    <!-- Product Image -->
+    <div class="product-card__image-wrapper">
+      {%- if product.featured_image -%}
+        <img src="{{ product.featured_image | img_url: '400x' }}" 
+             alt="{{ product.featured_image.alt | escape }}"
+             loading="lazy"
+             class="product-card__image">
+      {%- else -%}
+        <div class="product-card__image-placeholder">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+            <rect width="80" height="80" fill="#F5F8FB"/>
+            <path d="M40 20L50 35H30L40 20Z" fill="#072B6B" opacity="0.3"/>
+            <rect x="25" y="35" width="30" height="25" fill="#2E9E36" opacity="0.3"/>
+          </svg>
+        </div>
+      {%- endif -%}
+
+      <!-- Badges -->
+      <div class="product-card__badges">
+        {%- if product.compare_at_price > product.price -%}
+          {%- assign discount = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+          <span class="badge badge-discount">-{{ discount }}%</span>
+        {%- endif -%}
+        
+        {%- if product.tags contains 'bestseller' -%}
+          <span class="badge badge-bestseller">🔥 Bestseller</span>
+        {%- endif -%}
+        
+        {%- if product.tags contains 'new' -%}
+          <span class="badge badge-new">✨ New</span>
+        {%- endif -%}
+        
+        {%- if product.tags contains 'instant-download' -%}
+          <span class="badge badge-instant">⚡ Instant PDF</span>
+        {%- endif -%}
+      </div>
+
+      <!-- Quick View Button -->
+      <button class="product-card__quick-view" data-product-id="{{ product.id }}">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M10 4C5 4 1.73 7.11 1 10C1.73 12.89 5 16 10 16C15 16 18.27 12.89 19 10C18.27 7.11 15 4 10 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        Quick View
+      </button>
+    </div>
+
+    <!-- Product Info -->
+    <div class="product-card__info">
+      <!-- Product Title -->
+      <h3 class="product-card__title">{{ product.title }}</h3>
+
+      <!-- Product Vendor/Category -->
+      {%- if product.vendor != blank -%}
+        <p class="product-card__vendor">{{ product.vendor }}</p>
+      {%- endif -%}
+
+      <!-- Rating -->
+      {%- if product.metafields.reviews.rating.value != blank -%}
+        <div class="product-card__rating">
+          {%- assign rating = product.metafields.reviews.rating.value -%}
+          {%- assign full_stars = rating | floor -%}
+          {%- assign has_half = rating | modulo: 1 | at_least: 0.5 -%}
+          
+          <div class="stars">
+            {%- for i in (1..full_stars) -%}
+              <span class="star star-full">⭐</span>
+            {%- endfor -%}
+            {%- if has_half > 0 -%}
+              <span class="star star-half">⭐</span>
+            {%- endif -%}
+          </div>
+          <span class="rating-count">({{ product.metafields.reviews.rating_count.value | default: 0 }})</span>
+        </div>
+      {%- else -%}
+        <div class="product-card__rating">
+          <div class="stars">
+            <span class="star star-full">⭐</span>
+            <span class="star star-full">⭐</span>
+            <span class="star star-full">⭐</span>
+            <span class="star star-full">⭐</span>
+            <span class="star star-full">⭐</span>
+          </div>
+          <span class="rating-count">(4.8)</span>
+        </div>
+      {%- endif -%}
+
+      <!-- Price -->
+      <div class="product-card__price">
+        {%- if product.compare_at_price > product.price -%}
+          <span class="price-compare">{{ product.compare_at_price | money }}</span>
+        {%- endif -%}
+        <span class="price-current">{{ product.price | money }}</span>
+      </div>
+
+      <!-- Features -->
+      <ul class="product-card__features">
+        <li>📄 PDF Format</li>
+        <li>📥 Instant Download</li>
+        <li>🔄 Free Updates</li>
+      </ul>
+    </div>
+  </a>
+
+  <!-- Add to Cart Button -->
+  <div class="product-card__actions">
+    <button class="btn btn-primary product-card__add-to-cart" 
+            data-product-id="{{ product.id }}"
+            data-variant-id="{{ product.selected_or_first_available_variant.id }}">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M3 3H5L5.4 5M7 13H17L19 5H5.4M7 13L5.4 5M7 13L4.70711 15.2929C4.07714 15.9229 4.52331 17 5.41421 17H17M17 17C15.8954 17 15 17.8954 15 19C15 20.1046 15.8954 21 17 21C18.1046 21 19 20.1046 19 19C19 17.8954 18.1046 17 17 17ZM9 19C9 20.1046 8.10457 21 7 21C5.89543 21 5 20.1046 5 19C5 17.8954 5.89543 17 7 17C8.10457 17 9 17.8954 9 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Add to Cart
+    </button>
+  </div>
+</div>
+
+<style>
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+  }
+
+  .product-card__link {
+    text-decoration: none;
+    color: inherit;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-card__image-wrapper {
+    position: relative;
+    padding-top: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    background: var(--color-light-bg);
+  }
+
+  .product-card__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .product-card:hover .product-card__image {
+    transform: scale(1.05);
+  }
+
+  .product-card__image-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .product-card__badges {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 2;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    backdrop-filter: blur(10px);
+  }
+
+  .badge-discount {
+    background: rgba(255, 59, 48, 0.9);
+    color: var(--color-white);
+  }
+
+  .badge-bestseller {
+    background: rgba(255, 149, 0, 0.9);
+    color: var(--color-white);
+  }
+
+  .badge-new {
+    background: rgba(46, 158, 54, 0.9);
+    color: var(--color-white);
+  }
+
+  .badge-instant {
+    background: rgba(7, 43, 107, 0.9);
+    color: var(--color-white);
+  }
+
+  .product-card__quick-view {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--color-white);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 3;
+  }
+
+  .product-card:hover .product-card__quick-view {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .product-card__info {
+    flex: 1;
+    padding: 0 16px;
+  }
+
+  .product-card__title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-navy);
+    margin-bottom: 8px;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .product-card__vendor {
+    font-size: 0.85rem;
+    color: var(--color-green);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .product-card__rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .star {
+    font-size: 0.9rem;
+  }
+
+  .rating-count {
+    font-size: 0.85rem;
+    color: var(--color-dark-text);
+    opacity: 0.7;
+  }
+
+  .product-card__price {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .price-compare {
+    font-size: 0.95rem;
+    color: var(--color-dark-text);
+    opacity: 0.6;
+    text-decoration: line-through;
+  }
+
+  .price-current {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-green);
+  }
+
+  .product-card__features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .product-card__features li {
+    font-size: 0.85rem;
+    color: var(--color-dark-text);
+    opacity: 0.8;
+  }
+
+  .product-card__actions {
+    padding: 0 16px 16px;
+  }
+
+  .product-card__add-to-cart {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px;
+    font-size: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .product-card__title {
+      font-size: 1rem;
+    }
+
+    .price-current {
+      font-size: 1.25rem;
+    }
+  }
+</style>

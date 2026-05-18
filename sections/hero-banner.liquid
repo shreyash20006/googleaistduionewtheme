@@ -1,0 +1,404 @@
+{{ 'section-hero.css' | asset_url | stylesheet_tag }}
+
+<section class="hero-banner" style="background: linear-gradient(135deg, {{ section.settings.gradient_color_1 }} 0%, {{ section.settings.gradient_color_2 }} 100%);">
+  <div class="hero-banner__container container">
+    <div class="hero-banner__content fade-in-up">
+      {%- if section.settings.badge_text != blank -%}
+        <div class="hero-badge">
+          <span class="hero-badge__icon">✨</span>
+          <span class="hero-badge__text">{{ section.settings.badge_text }}</span>
+        </div>
+      {%- endif -%}
+
+      <h1 class="hero-banner__title">
+        {{ section.settings.heading }}
+      </h1>
+
+      <p class="hero-banner__subtitle">
+        {{ section.settings.subheading }}
+      </p>
+
+      <div class="hero-banner__buttons">
+        {%- if section.settings.button_1_text != blank -%}
+          <a href="{{ section.settings.button_1_link }}" class="btn btn-primary hero-btn">
+            {{ section.settings.button_1_text }}
+          </a>
+        {%- endif -%}
+        
+        {%- if section.settings.button_2_text != blank -%}
+          <a href="{{ section.settings.button_2_link }}" class="btn btn-secondary hero-btn">
+            {{ section.settings.button_2_text }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.show_features -%}
+        <div class="hero-features">
+          <div class="hero-feature">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Instant PDF Download</span>
+          </div>
+          <div class="hero-feature">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 6V12L16 14M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>24/7 Support</span>
+          </div>
+          <div class="hero-feature">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M17 20H22V18C22 16.3431 20.6569 15 19 15C18.0444 15 17.1931 15.4468 16.6438 16.1429M17 20H7M17 20V18C17 17.3438 16.8736 16.717 16.6438 16.1429M7 20H2V18C2 16.3431 3.34315 15 5 15C5.95561 15 6.80686 15.4468 7.35625 16.1429M7 20V18C7 17.3438 7.12642 16.717 7.35625 16.1429M7.35625 16.1429C8.0935 14.301 9.89482 13 12 13C14.1052 13 15.9065 14.301 16.6438 16.1429M15 7C15 8.65685 13.6569 10 12 10C10.3431 10 9 8.65685 9 7C9 5.34315 10.3431 4 12 4C13.6569 4 15 5.34315 15 7ZM21 10C21 11.1046 20.1046 12 19 12C17.8954 12 17 11.1046 17 10C17 8.89543 17.8954 8 19 8C20.1046 8 21 8.89543 21 10ZM7 10C7 11.1046 6.10457 12 5 12C3.89543 12 3 11.1046 3 10C3 8.89543 3.89543 8 5 8C6.10457 8 7 8.89543 7 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>10,000+ Students</span>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.show_image and section.settings.hero_image != blank -%}
+      <div class="hero-banner__image fade-in-up">
+        <div class="hero-image-wrapper">
+          <img src="{{ section.settings.hero_image | img_url: '800x' }}" 
+               alt="{{ section.settings.heading }}"
+               loading="lazy">
+          
+          <!-- Floating Elements -->
+          <div class="floating-element floating-element-1">
+            <div class="glass-card" style="padding: 16px;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 48px; height: 48px; background: var(--color-green); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+                  📚
+                </div>
+                <div>
+                  <div style="font-weight: 700; color: var(--color-navy);">500+ Notes</div>
+                  <div style="font-size: 0.85rem; color: var(--color-dark-text);">Available</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="floating-element floating-element-2">
+            <div class="glass-card" style="padding: 16px;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 48px; height: 48px; background: var(--color-navy); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+                  ⭐
+                </div>
+                <div>
+                  <div style="font-weight: 700; color: var(--color-navy);">4.9/5 Rating</div>
+                  <div style="font-size: 0.85rem; color: var(--color-dark-text);">From Students</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+
+  <!-- Background Decorations -->
+  <div class="hero-decoration hero-decoration-1"></div>
+  <div class="hero-decoration hero-decoration-2"></div>
+  <div class="hero-decoration hero-decoration-3"></div>
+</section>
+
+<style>
+  .hero-banner {
+    position: relative;
+    padding: 80px 0;
+    overflow: hidden;
+    color: var(--color-white);
+  }
+
+  .hero-banner__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-banner__content {
+    animation-delay: 0.2s;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 8px 20px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .hero-badge__icon {
+    font-size: 1.2rem;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+
+  .hero-badge__text {
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .hero-banner__title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .hero-banner__subtitle {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: 32px;
+    opacity: 0.95;
+  }
+
+  .hero-banner__buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+
+  .hero-btn {
+    padding: 16px 40px;
+    font-size: 1.1rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  .hero-features {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .hero-feature {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+  }
+
+  .hero-feature svg {
+    stroke: currentColor;
+  }
+
+  .hero-banner__image {
+    position: relative;
+    animation-delay: 0.4s;
+  }
+
+  .hero-image-wrapper {
+    position: relative;
+  }
+
+  .hero-image-wrapper img {
+    width: 100%;
+    height: auto;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  }
+
+  .floating-element {
+    position: absolute;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .floating-element-1 {
+    top: 10%;
+    right: -10%;
+    animation-delay: 0s;
+  }
+
+  .floating-element-2 {
+    bottom: 10%;
+    left: -10%;
+    animation-delay: 1s;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  .hero-decoration {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.1;
+    z-index: 1;
+  }
+
+  .hero-decoration-1 {
+    width: 400px;
+    height: 400px;
+    background: var(--color-white);
+    top: -200px;
+    right: -200px;
+    animation: rotate 20s linear infinite;
+  }
+
+  .hero-decoration-2 {
+    width: 300px;
+    height: 300px;
+    background: var(--color-white);
+    bottom: -150px;
+    left: -150px;
+    animation: rotate 15s linear infinite reverse;
+  }
+
+  .hero-decoration-3 {
+    width: 200px;
+    height: 200px;
+    background: var(--color-white);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse 4s ease-in-out infinite;
+  }
+
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @media (max-width: 1024px) {
+    .hero-banner__container {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .hero-banner__title {
+      font-size: 2.5rem;
+    }
+
+    .hero-banner__image {
+      order: -1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-banner {
+      padding: 60px 0;
+    }
+
+    .hero-banner__title {
+      font-size: 2rem;
+    }
+
+    .hero-banner__subtitle {
+      font-size: 1rem;
+    }
+
+    .hero-banner__buttons {
+      flex-direction: column;
+    }
+
+    .hero-btn {
+      width: 100%;
+      text-align: center;
+    }
+
+    .hero-features {
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .floating-element {
+      display: none;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "🎓 Premium B.Pharmacy Notes"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Master B.Pharmacy with Premium Study Notes"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Get handwritten notes, PYQs, MCQs, and complete semester material. Trusted by 10,000+ pharmacy students across India."
+    },
+    {
+      "type": "text",
+      "id": "button_1_text",
+      "label": "Button 1 Text",
+      "default": "Browse Notes"
+    },
+    {
+      "type": "url",
+      "id": "button_1_link",
+      "label": "Button 1 Link"
+    },
+    {
+      "type": "text",
+      "id": "button_2_text",
+      "label": "Button 2 Text",
+      "default": "View Combo Packs"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "Button 2 Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_features",
+      "label": "Show Features",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "label": "Show Hero Image",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    },
+    {
+      "type": "color",
+      "id": "gradient_color_1",
+      "label": "Gradient Color 1",
+      "default": "#072B6B"
+    },
+    {
+      "type": "color",
+      "id": "gradient_color_2",
+      "label": "Gradient Color 2",
+      "default": "#2E9E36"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,83 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {
+          "show_announcement": true,
+          "announcement_text": "🎉 Get 20% OFF on All Semester Notes | Use Code: TGPCOP20",
+          "show_icon": true,
+          "background_color": "#2e9e36",
+          "text_color": "#ffffff",
+          "link_url": "",
+          "link_text": "Shop Now",
+          "show_close": true
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo": "shopify://shop_images/logo_notes.jpg",
+          "logo_width": 90,
+          "menu": "main-menu"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "footer-0": {
+            "type": "link_list",
+            "settings": {
+              "heading": "Quick Links",
+              "menu": "footer"
+            }
+          },
+          "footer-1": {
+            "type": "link_list",
+            "settings": {
+              "heading": "Support",
+              "menu": "footer"
+            }
+          }
+        },
+        "block_order": [
+          "footer-0",
+          "footer-1"
+        ],
+        "settings": {
+          "description": "Your trusted source for premium B.Pharmacy study materials. Helping students excel in their pharmaceutical education.",
+          "show_social": true,
+          "background_color": "#072b6b",
+          "text_color": "#ffffff",
+          "show_newsletter": true,
+          "newsletter_heading": "Stay Updated",
+          "newsletter_text": "Subscribe to get updates on new notes and exclusive offers.",
+          "show_payment_icons": true
+        }
+      },
+      "mobile-bottom-nav": {
+        "type": "mobile-bottom-nav",
+        "settings": {}
+      },
+      "floating-whatsapp": {
+        "type": "floating-whatsapp",
+        "settings": {
+          "enable_whatsapp": true,
+          "show_text": true,
+          "button_text": "Chat with us",
+          "default_message": "Hi! I need help with B.Pharmacy notes."
+        }
+      }
+    },
+    "content_for_index": []
+  }
+}

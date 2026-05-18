@@ -1,0 +1,198 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "TGPCOP NOTES Premium",
+    "theme_version": "1.0.0",
+    "theme_author": "TGPCOP",
+    "theme_documentation_url": "https://tgpcopnotes.com/docs",
+    "theme_support_url": "https://tgpcopnotes.com/support"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Brand Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_navy",
+        "label": "Deep Navy Blue",
+        "default": "#072B6B"
+      },
+      {
+        "type": "color",
+        "id": "color_green",
+        "label": "Pharma Green",
+        "default": "#2E9E36"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_green",
+        "label": "Accent Green Hover",
+        "default": "#41C94B"
+      },
+      {
+        "type": "color",
+        "id": "color_light_bg",
+        "label": "Light Background",
+        "default": "#F5F8FB"
+      },
+      {
+        "type": "color",
+        "id": "color_dark_text",
+        "label": "Dark Text",
+        "default": "#1E293B"
+      },
+      {
+        "type": "color",
+        "id": "color_white",
+        "label": "White",
+        "default": "#FFFFFF"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Font Settings"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_header_font",
+        "default": "assistant_n4",
+        "label": "Heading Font",
+        "info": "Bold modern headings"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "default": "assistant_n4",
+        "label": "Body Font",
+        "info": "Professional educational fonts"
+      }
+    ]
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo Image"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "min": 50,
+        "max": 250,
+        "step": 10,
+        "default": 150,
+        "unit": "px",
+        "label": "Logo Width"
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "Will be scaled down to 32 x 32px"
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social Links"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook",
+        "info": "https://facebook.com/tgpcopnotes"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram",
+        "info": "https://instagram.com/tgpcopnotes"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube_link",
+        "label": "YouTube",
+        "info": "https://youtube.com/@tgpcopnotes"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "Twitter",
+        "info": "https://twitter.com/tgpcopnotes"
+      },
+      {
+        "type": "text",
+        "id": "social_telegram_link",
+        "label": "Telegram",
+        "info": "https://t.me/tgpcopnotes"
+      },
+      {
+        "type": "text",
+        "id": "social_whatsapp_number",
+        "label": "WhatsApp Number",
+        "info": "Format: 919876543210"
+      }
+    ]
+  },
+  {
+    "name": "Contact Information",
+    "settings": [
+      {
+        "type": "text",
+        "id": "contact_email",
+        "label": "Email",
+        "default": "support@tgpcopnotes.com"
+      },
+      {
+        "type": "text",
+        "id": "contact_phone",
+        "label": "Phone",
+        "default": "+91 98765 43210"
+      },
+      {
+        "type": "textarea",
+        "id": "contact_address",
+        "label": "Address"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart Type",
+        "default": "drawer",
+        "options": [
+          {
+            "value": "drawer",
+            "label": "Drawer"
+          },
+          {
+            "value": "page",
+            "label": "Page"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_notes_enable",
+        "label": "Enable Cart Notes",
+        "default": true
+      }
+    ]
+  }
+]

@@ -1,0 +1,176 @@
+{{ 'section-floating-whatsapp.css' | asset_url | stylesheet_tag }}
+
+{%- if section.settings.enable_whatsapp and settings.social_whatsapp_number != blank -%}
+<a href="https://wa.me/{{ settings.social_whatsapp_number }}?text={{ section.settings.default_message | url_encode }}" 
+   class="floating-whatsapp"
+   target="_blank"
+   rel="noopener"
+   aria-label="Chat on WhatsApp">
+  <div class="whatsapp-icon">
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+      <path d="M16 0C7.164 0 0 7.164 0 16C0 18.777 0.744 21.373 2.043 23.621L0.696 29.304L6.579 27.987C8.744 29.145 11.289 29.8 14 29.8C22.836 29.8 30 22.636 30 13.8C30 4.964 22.836 0 16 0ZM16 27.2C13.564 27.2 11.289 26.545 9.364 25.387L8.943 25.145L3.943 26.345L5.164 21.545L4.9 21.1C3.6 19.1 2.8 16.7 2.8 14C2.8 8.7 7.164 4.4 16 4.4C24.836 4.4 27.2 8.7 27.2 14C27.2 19.3 22.836 27.2 16 27.2Z" fill="white"/>
+      <path d="M21.5 17.8C21.1 17.6 19.1 16.6 18.7 16.5C18.3 16.3 18 16.3 17.7 16.7C17.4 17.1 16.7 18 16.4 18.3C16.2 18.6 15.9 18.6 15.5 18.4C15.1 18.2 13.8 17.8 12.3 16.4C11.1 15.3 10.3 14 10 13.6C9.8 13.2 10 13 10.2 12.8C10.4 12.6 10.6 12.3 10.8 12.1C11 11.9 11.1 11.7 11.2 11.5C11.3 11.2 11.3 11 11.2 10.8C11.1 10.6 10.3 8.6 10 7.9C9.7 7.2 9.4 7.3 9.2 7.3H8.5C8.2 7.3 7.8 7.4 7.4 7.8C7 8.2 6 9.2 6 11.2C6 13.2 7.5 15.1 7.7 15.4C7.9 15.7 10.3 19.4 14 21C14.9 21.4 15.6 21.6 16.2 21.8C17.1 22.1 17.9 22.1 18.5 22C19.2 21.9 20.8 21 21.1 20C21.5 19 21.5 18.1 21.4 18C21.3 17.9 21.9 18 21.5 17.8Z" fill="white"/>
+    </svg>
+  </div>
+  
+  {%- if section.settings.show_text -%}
+    <span class="whatsapp-text">{{ section.settings.button_text }}</span>
+  {%- endif -%}
+  
+  <div class="whatsapp-pulse"></div>
+</a>
+
+<style>
+  .floating-whatsapp {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #25D366;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 50px;
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    animation: slideInRight 0.5s ease-out;
+  }
+
+  .floating-whatsapp:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(37, 211, 102, 0.5);
+    background: #20BA5A;
+  }
+
+  .whatsapp-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .whatsapp-text {
+    font-weight: 600;
+    font-size: 0.95rem;
+    white-space: nowrap;
+  }
+
+  .whatsapp-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    background: #25D366;
+    opacity: 0.6;
+    animation: pulse 2s infinite;
+    pointer-events: none;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.6;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1.3);
+      opacity: 0;
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .floating-whatsapp {
+      bottom: 80px;
+      right: 16px;
+      padding: 10px 16px;
+    }
+
+    .whatsapp-icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    .whatsapp-icon svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .whatsapp-text {
+      font-size: 0.85rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .whatsapp-text {
+      display: none;
+    }
+
+    .floating-whatsapp {
+      padding: 12px;
+      border-radius: 50%;
+      width: 56px;
+      height: 56px;
+    }
+
+    .whatsapp-pulse {
+      border-radius: 50%;
+    }
+  }
+</style>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Floating WhatsApp",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_whatsapp",
+      "label": "Enable WhatsApp Button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_text",
+      "label": "Show Button Text",
+      "default": true,
+      "info": "Text will be hidden on small mobile screens"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Chat with us"
+    },
+    {
+      "type": "textarea",
+      "id": "default_message",
+      "label": "Default Message",
+      "default": "Hi! I need help with B.Pharmacy notes.",
+      "info": "This message will be pre-filled when user clicks the button"
+    },
+    {
+      "type": "paragraph",
+      "content": "WhatsApp number is configured in Theme Settings > Social Media"
+    }
+  ]
+}
+{% endschema %}

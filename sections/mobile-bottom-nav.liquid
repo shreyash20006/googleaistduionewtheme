@@ -1,0 +1,157 @@
+{{ 'section-mobile-bottom-nav.css' | asset_url | stylesheet_tag }}
+
+<nav class="mobile-bottom-nav">
+  <a href="{{ routes.root_url }}" class="mobile-nav-item {% if template.name == 'index' %}active{% endif %}">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M9 22V12H15V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>Home</span>
+  </a>
+
+  <a href="{{ routes.search_url }}" class="mobile-nav-item">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
+      <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <span>Search</span>
+  </a>
+
+  <a href="{{ routes.all_products_collection_url }}" class="mobile-nav-item mobile-nav-item--featured">
+    <div class="featured-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+        <path d="M2 3H8C9.06087 3 10.0783 3.42143 10.8284 4.17157C11.5786 4.92172 12 5.93913 12 7V21C12 20.2044 11.6839 19.4413 11.1213 18.8787C10.5587 18.3161 9.79565 18 9 18H2V3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M22 3H16C14.9391 3 13.9217 3.42143 13.1716 4.17157C12.4214 4.92172 12 5.93913 12 7V21C12 20.2044 12.3161 19.4413 12.8787 18.8787C13.4413 18.3161 14.2044 18 15 18H22V3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <span>Notes</span>
+  </a>
+
+  <a href="{{ routes.account_url }}" class="mobile-nav-item">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
+    </svg>
+    <span>Account</span>
+  </a>
+
+  <a href="{{ routes.cart_url }}" class="mobile-nav-item">
+    <div class="cart-icon-wrapper">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.70711 15.2929C4.07714 15.9229 4.52331 17 5.41421 17H17M17 17C15.8954 17 15 17.8954 15 19C15 20.1046 15.8954 21 17 21C18.1046 21 19 20.1046 19 19C19 17.8954 18.1046 17 17 17ZM9 19C9 20.1046 8.10457 21 7 21C5.89543 21 5 20.1046 5 19C5 17.8954 5.89543 17 7 17C8.10457 17 9 17.8954 9 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="mobile-cart-count" id="mobile-cart-count">{{ cart.item_count }}</span>
+    </div>
+    <span>Cart</span>
+  </a>
+</nav>
+
+<style>
+  .mobile-bottom-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--color-white);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    padding: 8px 0;
+    z-index: 1000;
+  }
+
+  @media (max-width: 768px) {
+    .mobile-bottom-nav {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    /* Add padding to body to prevent content from being hidden behind nav */
+    body {
+      padding-bottom: 70px;
+    }
+  }
+
+  .mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 12px;
+    color: var(--color-dark-text);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    flex: 1;
+  }
+
+  .mobile-nav-item span {
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  .mobile-nav-item svg {
+    stroke: var(--color-dark-text);
+    transition: all 0.3s ease;
+  }
+
+  .mobile-nav-item.active,
+  .mobile-nav-item:active {
+    color: var(--color-green);
+  }
+
+  .mobile-nav-item.active svg,
+  .mobile-nav-item:active svg {
+    stroke: var(--color-green);
+    transform: scale(1.1);
+  }
+
+  .mobile-nav-item--featured {
+    margin-top: -20px;
+  }
+
+  .featured-icon {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--color-green), var(--color-accent-green));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(46, 158, 54, 0.3);
+  }
+
+  .featured-icon svg {
+    stroke: var(--color-white);
+  }
+
+  .cart-icon-wrapper {
+    position: relative;
+  }
+
+  .mobile-cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--color-green);
+    color: var(--color-white);
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 10px;
+    min-width: 18px;
+    text-align: center;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Mobile Bottom Navigation",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Mobile bottom navigation bar appears on mobile devices only."
+    }
+  ]
+}
+{% endschema %}
