@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero-banner": {
@@ -12,12 +21,27 @@
         "button_2_link": "/collections/combo-packs",
         "show_features": true,
         "show_image": true,
-        "gradient_color_1": "#072B6B",
-        "gradient_color_2": "#2E9E36"
+        "gradient_color_1": "#072b6b",
+        "gradient_color_2": "#2e9e36"
       }
     },
     "semester-categories": {
       "type": "semester-categories",
+      "blocks": {
+        "semester_8hbrgf": {
+          "type": "semester",
+          "settings": {
+            "icon": "📚",
+            "title": "B.Pharm 1st Semester",
+            "description": "Complete notes for all subjects",
+            "product_count": "50+",
+            "link": "shopify://collections"
+          }
+        }
+      },
+      "block_order": [
+        "semester_8hbrgf"
+      ],
       "settings": {
         "heading": "Browse by Semester",
         "subheading": "Select your semester to access comprehensive study materials"
@@ -28,6 +52,7 @@
       "settings": {
         "heading": "Bestselling Notes",
         "subheading": "Most popular study materials chosen by students",
+        "collection": "b-pharmacy-1st-semester-notes-bundle-tgpcop-notes",
         "products_to_show": 8,
         "show_view_all": true,
         "button_text": "View All Notes"
@@ -38,6 +63,7 @@
       "settings": {
         "heading": "Latest Uploads",
         "subheading": "Newly added notes and study materials",
+        "collection": "b-pharmacy-1st-semester-notes-bundle-tgpcop-notes",
         "products_to_show": 8,
         "show_view_all": true,
         "button_text": "View All New Notes"
