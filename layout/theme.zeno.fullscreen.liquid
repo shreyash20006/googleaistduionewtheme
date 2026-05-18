@@ -1,0 +1,198 @@
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#072B6B">
+  <link rel="canonical" href="{{ canonical_url }}">
+  
+  {%- if settings.favicon != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | img_url: '32x32' }}">
+  {%- endif -%}
+
+  <title>
+    {{ page_title }}
+    {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+    {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  </title>
+
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  {% render 'meta-tags' %}
+
+  <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+  {{ content_for_header }}
+
+  {%- liquid
+    assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
+    assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
+    assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
+  %}
+
+  {% style %}
+    {{ settings.type_body_font | font_face: font_display: 'swap' }}
+    {{ body_font_bold | font_face: font_display: 'swap' }}
+    {{ body_font_italic | font_face: font_display: 'swap' }}
+    {{ body_font_bold_italic | font_face: font_display: 'swap' }}
+    {{ settings.type_header_font | font_face: font_display: 'swap' }}
+
+    :root {
+      --color-navy: #072B6B;
+      --color-green: #2E9E36;
+      --color-white: #FFFFFF;
+      --color-light-bg: #F5F8FB;
+      --color-dark-text: #1E293B;
+      --color-accent-green: #41C94B;
+      
+      --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+      --font-body-style: {{ settings.type_body_font.style }};
+      --font-body-weight: {{ settings.type_body_font.weight }};
+      
+      --font-heading-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
+      --font-heading-style: {{ settings.type_header_font.style }};
+      --font-heading-weight: {{ settings.type_header_font.weight }};
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      box-sizing: border-box;
+      font-size: 16px;
+      height: 100%;
+    }
+
+    body {
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      grid-template-columns: 100%;
+      min-height: 100%;
+      margin: 0;
+      font-size: 1rem;
+      letter-spacing: 0.06rem;
+      line-height: 1.6;
+      font-family: var(--font-body-family);
+      font-style: var(--font-body-style);
+      font-weight: var(--font-body-weight);
+      color: var(--color-dark-text);
+      background-color: var(--color-light-bg);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading-family);
+      font-style: var(--font-heading-style);
+      font-weight: var(--font-heading-weight);
+      line-height: 1.2;
+      margin: 0 0 1rem;
+    }
+
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.75rem; }
+    h4 { font-size: 1.5rem; }
+    h5 { font-size: 1.25rem; }
+    h6 { font-size: 1rem; }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.75rem; }
+      h3 { font-size: 1.5rem; }
+    }
+
+    a {
+      color: var(--color-navy);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--color-green);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 30px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: var(--color-green);
+      color: var(--color-white);
+    }
+
+    .btn-primary:hover {
+      background: var(--color-accent-green);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(46, 158, 54, 0.3);
+    }
+
+    .btn-secondary {
+      background: var(--color-navy);
+      color: var(--color-white);
+    }
+
+    .btn-secondary:hover {
+      background: #0a3a8f;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(7, 43, 107, 0.3);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    /* Glassmorphism */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+  {% endstyle %}
+
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+  <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
+</head>
+
+<body class="template-{{ template.name }}">
+          {{ content_for_layout }}
+        </body>
+      
