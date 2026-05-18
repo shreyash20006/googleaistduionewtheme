@@ -27,13 +27,20 @@
         "type": "header",
         "settings": {
           "logo": "shopify://shop_images/logo_notes.jpg",
-          "logo_width": 90,
+          "logo_width": 80,
           "menu": "main-menu"
         }
       },
       "footer": {
         "type": "footer",
         "blocks": {
+          "link_list_PQ7EFK": {
+            "type": "link_list",
+            "settings": {
+              "heading": "Quick Links",
+              "menu": ""
+            }
+          },
           "footer-0": {
             "type": "link_list",
             "settings": {
@@ -50,10 +57,12 @@
           }
         },
         "block_order": [
+          "link_list_PQ7EFK",
           "footer-0",
           "footer-1"
         ],
         "settings": {
+          "logo": "shopify://shop_images/logo_notes.jpg",
           "description": "Your trusted source for premium B.Pharmacy study materials. Helping students excel in their pharmaceutical education.",
           "show_social": true,
           "background_color": "#072b6b",
@@ -78,6 +87,13 @@
         }
       }
     },
-    "content_for_index": []
+    "content_for_index": [],
+    "blocks": {
+      "14060646107696862457": {
+        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {}
+      }
+    }
   }
 }
