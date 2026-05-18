@@ -1,0 +1,182 @@
+{{ 'section-announcement-bar.css' | asset_url | stylesheet_tag }}
+
+{%- if section.settings.show_announcement -%}
+<div class="announcement-bar" style="background-color: {{ section.settings.background_color }}; color: {{ section.settings.text_color }};">
+  <div class="announcement-bar__container container">
+    <div class="announcement-bar__content">
+      {%- if section.settings.show_icon -%}
+        <span class="announcement-bar__icon">📢</span>
+      {%- endif -%}
+      <p class="announcement-bar__text">
+        {{ section.settings.announcement_text }}
+      </p>
+      {%- if section.settings.link_url != blank -%}
+        <a href="{{ section.settings.link_url }}" class="announcement-bar__link">
+          {{ section.settings.link_text }}
+          <span class="arrow">→</span>
+        </a>
+      {%- endif -%}
+    </div>
+    {%- if section.settings.show_close -%}
+      <button class="announcement-bar__close" aria-label="Close announcement">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M12 4L4 12M4 4L12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+  .announcement-bar {
+    padding: 12px 0;
+    text-align: center;
+    position: relative;
+    z-index: 100;
+  }
+
+  .announcement-bar__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .announcement-bar__content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .announcement-bar__icon {
+    font-size: 1.2rem;
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  .announcement-bar__text {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  .announcement-bar__link {
+    font-weight: 600;
+    text-decoration: underline;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: gap 0.3s ease;
+  }
+
+  .announcement-bar__link:hover {
+    gap: 8px;
+  }
+
+  .announcement-bar__close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    color: inherit;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+
+  .announcement-bar__close:hover {
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    .announcement-bar {
+      padding: 10px 0;
+    }
+    
+    .announcement-bar__text {
+      font-size: 0.85rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const closeBtn = document.querySelector('.announcement-bar__close');
+    const announcementBar = document.querySelector('.announcement-bar');
+    
+    if (closeBtn && announcementBar) {
+      closeBtn.addEventListener('click', function() {
+        announcementBar.style.display = 'none';
+        localStorage.setItem('announcement-bar-closed', 'true');
+      });
+
+      // Check if user previously closed the announcement
+      if (localStorage.getItem('announcement-bar-closed') === 'true') {
+        announcementBar.style.display = 'none';
+      }
+    }
+  });
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show Announcement Bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Announcement Text",
+      "default": "🎉 Get 20% OFF on All Semester Notes | Use Code: TGPCOP20"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icon",
+      "label": "Show Icon",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#2E9E36"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_close",
+      "label": "Show Close Button",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

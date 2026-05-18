@@ -1,0 +1,56 @@
+/**
+ * TGPCOP NOTES - Theme Styles
+ * Additional theme-specific styles
+ * Base styles are in base.css
+ */
+
+/* This file is for any additional custom styles */
+/* Most styles are included in individual section files */
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-light-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-navy);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-green);
+}
+
+/* Selection color */
+::selection {
+  background: var(--color-green);
+  color: var(--color-white);
+}
+
+::-moz-selection {
+  background: var(--color-green);
+  color: var(--color-white);
+}
+
+/* Focus visible for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-green);
+  outline-offset: 2px;
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition-property: background-color, border-color, color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+
+/* Prevent transition on page load */
+.no-transition * {
+  transition: none !important;
+}
