@@ -1,0 +1,6 @@
+{
+  "name": "TGPCOP NOTES",
+  "description": "Premium Pharmacy Notes, PYQs & Handwritten PDFs for B.Pharm students.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
